@@ -5,13 +5,13 @@ FROM node:18-alpine AS builder
 WORKDIR /app
 
 # 复制 package 文件
-COPY client/package*.json ./
+COPY package*.json ./
 
 # 安装依赖
 RUN npm ci && npm cache clean --force
 
 # 复制源代码
-COPY client/ .
+COPY . .
 
 # 构建应用
 RUN npm run build
@@ -25,8 +25,8 @@ RUN apk add --no-cache curl
 # 复制构建产物
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# 复制 Nginx 配置（如果需要自定义）
-# COPY docker/nginx.conf /etc/nginx/nginx.conf
+# 复制 Nginx 配置
+COPY nginx.conf /etc/nginx/nginx.conf
 
 # 创建 Nginx 用户和组
 RUN addgroup -g 1001 -S nginx && \

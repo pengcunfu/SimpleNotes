@@ -1,0 +1,111 @@
+version: '3.8'
+
+services:
+  # MongoDB 数据库
+  mongodb:
+    image: mongo:7.0
+    container_name: simplenotes-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_DATABASE: simplenotes
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - ./docker/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - simplenotes-network
+
+  # Minio 对象存储
+  minio:
+    image: minio/minio:latest
+    container_name: simplenotes-minio
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin123
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+    networks:
+      - simplenotes-network
+
+  # Redis (可选，用于缓存和会话)
+  redis:
+    image: redis:7-alpine
+    container_name: simplenotes-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - simplenotes-network
+
+  # 后端服务
+  backend:
+    build:
+      context: ./notes-server
+      dockerfile: Dockerfile
+    container_name: simplenotes-backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      MONGODB_URI: mongodb://admin:password123@mongodb:27017/simplenotes?authSource=admin
+      JWT_SECRET: your-super-secret-jwt-key-change-this-in-production
+      EMAIL_HOST: smtp.gmail.com
+      EMAIL_PORT: 587
+      EMAIL_USER: your-email@gmail.com
+      EMAIL_PASS: your-app-password
+      MINIO_ENDPOINT: minio
+      MINIO_PORT: 9000
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin123
+      MINIO_BUCKET: simplenotes-files
+      MINIO_USE_SSL: false
+      FRONTEND_URL: http://localhost
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+      - minio
+      - redis
+    volumes:
+      - backend_uploads:/app/uploads
+    networks:
+      - simplenotes-network
+
+  # 前端服务 (Nginx)
+  frontend:
+    build:
+      context: ./notes-web
+      dockerfile: Dockerfile
+    container_name: simplenotes-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - backend
+    networks:
+      - simplenotes-network
+
+volumes:
+  mongodb_data:
+    driver: local
+  minio_data:
+    driver: local
+  redis_data:
+    driver: local
+  backend_uploads:
+    driver: local
+
+networks:
+  simplenotes-network:
+    driver: bridge

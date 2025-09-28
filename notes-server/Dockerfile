@@ -8,13 +8,13 @@ WORKDIR /app
 ENV NODE_ENV=production
 
 # 复制 package 文件
-COPY server/package*.json ./
+COPY package*.json ./
 
 # 安装依赖
 RUN npm ci --only=production && npm cache clean --force
 
 # 复制源代码
-COPY server/ .
+COPY . .
 
 # 创建非 root 用户
 RUN addgroup -g 1001 -S nodejs && \

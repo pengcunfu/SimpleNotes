@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  # MongoDB 数据库
+  mongodb:
+    image: mongo:7.0
+    container_name: simplenotes-mongodb-dev
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_DATABASE: simplenotes
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_dev_data:/data/db
+    networks:
+      - simplenotes-dev-network
+
+  # Minio 对象存储
+  minio:
+    image: minio/minio:latest
+    container_name: simplenotes-minio-dev
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_dev_data:/data
+    networks:
+      - simplenotes-dev-network
+
+  # Minio 客户端初始化
+  minio-init:
+    image: minio/mc:latest
+    container_name: simplenotes-minio-init
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      sleep 5;
+      /usr/bin/mc alias set minio http://minio:9000 minioadmin minioadmin;
+      /usr/bin/mc mb minio/simplenotes-files --ignore-existing;
+      /usr/bin/mc policy set public minio/simplenotes-files/public;
+      echo 'Minio initialization completed';
+      "
+    networks:
+      - simplenotes-dev-network
+
+volumes:
+  mongodb_dev_data:
+    driver: local
+  minio_dev_data:
+    driver: local
+
+networks:
+  simplenotes-dev-network:
+    driver: bridge

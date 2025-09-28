@@ -1,0 +1,27 @@
+{
+  "name": "simplenotes",
+  "version": "1.0.0",
+  "description": "A Markdown document management system with Vue frontend and Node.js backend",
+  "main": "server/index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
+    "server:dev": "cd server && npm run dev",
+    "client:dev": "cd client && npm run dev",
+    "start": "cd server && npm start",
+    "build": "cd client && npm run build",
+    "install:all": "npm install && cd server && npm install && cd ../client && npm install",
+    "init": "cd server && npm run init",
+    "create-admin": "cd server && npm run create-admin",
+    "docker:dev": "docker-compose -f docker-compose.dev.yml up -d",
+    "docker:dev:down": "docker-compose -f docker-compose.dev.yml down",
+    "docker:prod": "docker-compose up -d",
+    "docker:prod:down": "docker-compose down",
+    "setup": "npm run install:all && npm run docker:dev && sleep 10 && npm run init && npm run create-admin"
+  },
+  "keywords": ["vue", "nodejs", "mongodb", "markdown", "minio"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

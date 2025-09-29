@@ -50,7 +50,7 @@
                   管理后台
                 </el-dropdown-item>
                 <el-dropdown-item command="logout" divided>
-                  <el-icon><SwitchButton /></el-icon>
+                  <el-icon><Switch /></el-icon>
                   退出登录
                 </el-dropdown-item>
               </el-dropdown-menu>
@@ -111,7 +111,7 @@
             class="mobile-nav-link"
             @click="showMobileMenu = false"
           >
-            <el-icon><HomeFilled /></el-icon>
+            <el-icon><House /></el-icon>
             首页
           </router-link>
           <router-link 
@@ -160,7 +160,7 @@
               plain 
               @click="handleUserMenuCommand('logout')"
             >
-              <el-icon><SwitchButton /></el-icon>
+              <el-icon><Switch /></el-icon>
               退出登录
             </el-button>
           </div>
@@ -214,10 +214,10 @@ import {
   User,
   ArrowDown,
   Setting,
-  SwitchButton,
+  Switch,
   Warning,
   Menu,
-  HomeFilled,
+  House,
   Moon,
   Sunny
 } from '@element-plus/icons-vue'

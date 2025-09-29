@@ -15,7 +15,7 @@
           @click="toggleSidebar"
         >
           <el-icon>
-            <component :is="sidebarCollapsed ? 'Expand' : 'Fold'" />
+            <component :is="sidebarCollapsed ? 'ArrowRight' : 'ArrowLeft'" />
           </el-icon>
         </el-button>
       </div>
@@ -28,7 +28,7 @@
           :unique-opened="true"
         >
           <el-menu-item index="/admin">
-            <el-icon><DataBoard /></el-icon>
+            <el-icon><Odometer /></el-icon>
             <span>仪表板</span>
           </el-menu-item>
 
@@ -81,7 +81,7 @@
                 前台首页
               </el-dropdown-item>
               <el-dropdown-item command="logout" divided>
-                <el-icon><SwitchButton /></el-icon>
+                <el-icon><Switch /></el-icon>
                 退出登录
               </el-dropdown-item>
             </el-dropdown-menu>
@@ -170,15 +170,15 @@ import { useAuthStore } from '../../stores/auth'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import {
   Document,
-  DataBoard,
+  Odometer,
   List,
   Plus,
   User,
   Setting,
-  Fold,
-  Expand,
+  ArrowLeft,
+  ArrowRight,
   Monitor,
-  SwitchButton,
+  Switch,
   Bell,
   Upload,
   Moon,

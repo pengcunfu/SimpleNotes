@@ -72,8 +72,8 @@
                 </div>
                 <div class="stat-item">
                   <el-button
-                    :type="isLiked ? 'danger' : 'default'"
-                    :icon="Heart"
+                    :type="isLiked ? 'warning' : 'default'"
+                    :icon="Star"
                     @click="toggleLike"
                     :loading="likeLoading"
                     text
@@ -182,7 +182,7 @@ import {
   User, 
   View, 
   Clock, 
-  Heart, 
+  Star, 
   Paperclip, 
   ArrowLeft, 
   Share 

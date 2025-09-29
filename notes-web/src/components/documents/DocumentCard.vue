@@ -57,7 +57,7 @@
           
           <!-- Category -->
           <div v-if="document.category" class="document-category">
-            <el-icon><FolderOpened /></el-icon>
+            <el-icon><Folder /></el-icon>
             <span>{{ document.category }}</span>
           </div>
         </div>
@@ -76,7 +76,7 @@
               <span>{{ formatNumber(document.views) }}</span>
             </div>
             <div v-if="document.likeCount > 0" class="stat-item">
-              <el-icon><Heart /></el-icon>
+              <el-icon><Star /></el-icon>
               <span>{{ formatNumber(document.likeCount) }}</span>
             </div>
           </div>
@@ -96,10 +96,10 @@
 import { computed } from 'vue'
 import { 
   User, 
-  FolderOpened, 
+  Folder, 
   Calendar, 
   View, 
-  Heart, 
+  Star, 
   Clock 
 } from '@element-plus/icons-vue'
 

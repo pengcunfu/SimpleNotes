@@ -48,7 +48,7 @@ const initializeApp = async () => {
     console.log('\n📋 Next steps:');
     console.log('1. If no admin user exists, run: npm run create-admin');
     console.log('2. Start the server: npm run dev');
-    console.log('3. Access the application at: http://localhost:5173');
+    console.log('3. Access the application at: http://localhost:8081');
 
   } catch (error) {
     console.error('❌ Initialization failed:', error);

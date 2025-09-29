@@ -5,7 +5,7 @@
         <!-- 404 Icon -->
         <div class="error-icon">
           <el-icon size="120" color="#E6A23C">
-            <WarningFilled />
+            <Warning />
           </el-icon>
         </div>
 
@@ -19,7 +19,7 @@
         <!-- Actions -->
         <div class="error-actions">
           <el-button type="primary" size="large" @click="goHome">
-            <el-icon><HomeFilled /></el-icon>
+            <el-icon><House /></el-icon>
             返回首页
           </el-button>
           <el-button size="large" @click="goBack">

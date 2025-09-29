@@ -11,7 +11,7 @@ services:
     restart: unless-stopped
     environment:
       NODE_ENV: production
-      PORT: 3000
+      PORT: 3001
       # 使用远程 MongoDB
       MONGODB_URI: mongodb://8.155.40.179:27017/simplenotes
       JWT_SECRET: ${JWT_SECRET:-your-super-secret-jwt-key-change-this}
@@ -27,9 +27,9 @@ services:
       MINIO_SECRET_KEY: ${MINIO_SECRET_KEY:-minioadmin123}
       MINIO_BUCKET: simplenotes-files
       MINIO_USE_SSL: false
-      FRONTEND_URL: ${FRONTEND_URL:-http://localhost}
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:8081}
     ports:
-      - "3000:3000"
+      - "3001:3001"
     volumes:
       - backend_uploads:/app/uploads
     networks:
@@ -43,9 +43,9 @@ services:
     container_name: simplenotes-frontend
     restart: unless-stopped
     environment:
-      VITE_API_URL: http://localhost:3000
+      VITE_API_URL: http://localhost:3001
     ports:
-      - "80:80"
+      - "8081:80"
     depends_on:
       - backend
     networks:

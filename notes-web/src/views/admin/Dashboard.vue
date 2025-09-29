@@ -19,7 +19,7 @@
           <div class="stat-title">{{ stat.title }}</div>
           <div class="stat-change" :class="stat.changeType">
             <el-icon size="12">
-              <component :is="stat.changeType === 'increase' ? 'TrendCharts' : 'Bottom'" />
+              <component :is="stat.changeType === 'increase' ? 'DataLine' : 'ArrowDown'" />
             </el-icon>
             <span>{{ stat.change }}</span>
           </div>
@@ -87,7 +87,7 @@
           </div>
           <div class="card-content">
             <div class="chart-placeholder">
-              <el-icon size="64" color="#909399"><TrendCharts /></el-icon>
+              <el-icon size="64" color="#909399"><DataLine /></el-icon>
               <p>图表功能开发中...</p>
             </div>
           </div>
@@ -211,16 +211,16 @@
 import { ref, onMounted } from 'vue'
 import { useAuthStore } from '../../stores/auth'
 import axios from '../../utils/axios'
-import { ElMessage } from 'element-plus'
+import { ElMessage } from 'element-plus'  
 import {
   Document,
   User,
   View,
-  Heart,
+  Star,
   Plus,
   Upload,
-  TrendCharts,
-  Bottom
+  DataLine,
+  ArrowDown
 } from '@element-plus/icons-vue'
 
 const authStore = useAuthStore()
@@ -256,7 +256,7 @@ const stats = ref([
     change: '+15%',
     changeType: 'increase',
     color: '#F56C6C',
-    icon: Heart
+    icon: Star
   }
 ])
 

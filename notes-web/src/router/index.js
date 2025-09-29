@@ -15,10 +15,10 @@ import DocumentList from '../views/documents/DocumentList.vue'
 // Admin views
 import AdminLayout from '../views/admin/AdminLayout.vue'
 import AdminDashboard from '../views/admin/Dashboard.vue'
-import AdminDocuments from '../views/admin/Documents.vue'
-import AdminDocumentEditor from '../views/admin/DocumentEditor.vue'
-import AdminUsers from '../views/admin/Users.vue'
-import AdminSettings from '../views/admin/Settings.vue'
+// import AdminDocuments from '../views/admin/Documents.vue'
+// import AdminDocumentEditor from '../views/admin/DocumentEditor.vue'
+// import AdminUsers from '../views/admin/Users.vue'
+// import AdminSettings from '../views/admin/Settings.vue'
 
 const routes = [
   {
@@ -104,36 +104,36 @@ const routes = [
         component: AdminDashboard,
         meta: { title: '管理后台' }
       },
-      {
-        path: 'documents',
-        name: 'AdminDocuments',
-        component: AdminDocuments,
-        meta: { title: '文档管理' }
-      },
-      {
-        path: 'documents/new',
-        name: 'AdminDocumentNew',
-        component: AdminDocumentEditor,
-        meta: { title: '新建文档' }
-      },
-      {
-        path: 'documents/:id/edit',
-        name: 'AdminDocumentEdit',
-        component: AdminDocumentEditor,
-        meta: { title: '编辑文档' }
-      },
-      {
-        path: 'users',
-        name: 'AdminUsers',
-        component: AdminUsers,
-        meta: { title: '用户管理' }
-      },
-      {
-        path: 'settings',
-        name: 'AdminSettings',
-        component: AdminSettings,
-        meta: { title: '系统设置' }
-      }
+      // {
+      //   path: 'documents',
+      //   name: 'AdminDocuments',
+      //   component: AdminDocuments,
+      //   meta: { title: '文档管理' }
+      // },
+      // {
+      //   path: 'documents/new',
+      //   name: 'AdminDocumentNew',
+      //   component: AdminDocumentEditor,
+      //   meta: { title: '新建文档' }
+      // },
+      // {
+      //   path: 'documents/:id/edit',
+      //   name: 'AdminDocumentEdit',
+      //   component: AdminDocumentEditor,
+      //   meta: { title: '编辑文档' }
+      // },
+      // {
+      //   path: 'users',
+      //   name: 'AdminUsers',
+      //   component: AdminUsers,
+      //   meta: { title: '用户管理' }
+      // },
+      // {
+      //   path: 'settings',
+      //   name: 'AdminSettings',
+      //   component: AdminSettings,
+      //   meta: { title: '系统设置' }
+      // }
     ]
   },
   {

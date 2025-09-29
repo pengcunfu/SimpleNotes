@@ -125,8 +125,7 @@ import {
   Upload,
   View,
   Share,
-  Lock,
-  CloudUpload
+  Lock
 } from '@element-plus/icons-vue'
 
 const authStore = useAuthStore()
@@ -176,7 +175,7 @@ const features = ref([
   },
   {
     id: 6,
-    icon: CloudUpload,
+    icon: Upload,
     color: '#606266',
     title: '云端存储',
     description: '基于 Minio 的分布式文件存储系统'
